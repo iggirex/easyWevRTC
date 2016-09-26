@@ -6,11 +6,11 @@ var path = require('path')
 
 let io = require('socket.io')();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 //if we're using Express put app into line 1 inside createServer
 //DONT PASS APP into io, app is express middleware
 io.attach(server);
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(3030)
 
