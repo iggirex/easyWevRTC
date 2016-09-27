@@ -1,7 +1,8 @@
 "use strict"
-var express = require('express')
-var app = express()
-let server = require('http').createServer(app);
+// var express = require('express')
+// var app = express()
+//app goes inside creatServer for express
+let server = require('http').createServer();
 var path = require('path')
 
 let io = require('socket.io')();
@@ -14,14 +15,14 @@ io.attach(server);
 
 server.listen(3030)
 
-io.on('connection', (socket) => {
+io.on('connection', function (socket)  {
   console.log('WE are insinde connection')
-  socket.on('peer-msg', (data) => {
+  socket.on('peer-msg', function (data) {
     console.log('Message from peer: %s', data);
     socket.broadcast.emit('peer-msg', data);
   })
 
-  socket.on('go-private', (data) => {
+  socket.on('go-private', function (data) {
     socket.broadcast.emit('go-private', data);
   });
 });
